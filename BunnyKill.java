@@ -17,8 +17,8 @@ public class BunnyKill {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-
-        int[][] matrix = new int[3][3];
+        int n = Integer.parseInt(scanner.nextLine());
+        int[][] matrix = new int[n][n];
 
         for (int i = 0; i < matrix.length; i++) {
             int[] input = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
