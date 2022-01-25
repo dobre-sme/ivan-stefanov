@@ -31,12 +31,6 @@ public class Main {
             bookList.add(book);
         }
 
-        /*Map<String,Double> authorTotal = new TreeMap<>();
-        for (Book book : bookList) {
-            authorTotal.putIfAbsent(book.getAuthor(), 0.0);
-            authorTotal.put(book.getAuthor(), authorTotal.get(book.getAuthor()) + book.getPrice());
-        } */
-
         Library library = new Library("MyLibrary", bookList);
 
         String inputDate = scanner.nextLine();
@@ -60,23 +54,5 @@ public class Main {
             return 0;
         }).forEach(e -> System.out.printf("%s -> %s%n", e.getTitle(), fmt.format(e.getReleaseDate())));
 
-        //LocalDateTime.parse()
-
-
-                //    public static LocalDateTime parse(CharSequence text) {
-        //        return parse(text, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        //    }
-      /*  authorTotal.entrySet().stream().sorted((e2,e1) -> {
-            if (e1.getValue().compareTo(e2.getValue()) ==0){
-                return e1.getKey().compareTo(e2.getKey());
-            }else if (e1.getValue().compareTo(e2.getValue()) > 0){
-                return 1;
-            }else {
-                return -1;
-            }
-
-        }).forEach(e ->
-                System.out.printf("%s -> %.2f%n", e.getKey(), e.getValue()));
-*/
     }
 }
