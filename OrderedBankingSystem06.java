@@ -1,5 +1,6 @@
 package Jan21;
 
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -18,36 +19,44 @@ public class OrderedBankingSystem06 {
             String account = data[1];
             double balance = Double.parseDouble(data[2]);
 
-            banks.putIfAbsent(bank,new LinkedHashMap<>());
+            banks.putIfAbsent(bank, new LinkedHashMap<>());
 
-            if(!banks.get(bank).containsKey(account)){
-                banks.get(bank).put(account,balance);
-            }else {
+            if (!banks.get(bank).containsKey(account)) {
+                banks.get(bank).put(account, balance);
+            } else {
                 double currentValue = banks.get(bank).get(account);
                 banks.get(bank).put(account, currentValue + balance);
             }
 
             input = scanner.nextLine();
         }
-        banks.entrySet().stream().sorted((e1,e2) -> {
+        DecimalFormat df = new DecimalFormat("0.#####");
+        banks.entrySet().stream().sorted((e1, e2) -> {
             double e2bankSum = e2.getValue().values().stream().mapToDouble(d -> d).sum();
             double e1bankSum = e1.getValue().values().stream().mapToDouble(d -> d).sum();
-            int result = (int) (e2bankSum - e1bankSum);
-            if (result == 0){
-                double maxBalanceE1 = getHighestBalance(e1.getValue());
-                double maxBalanceE2 = getHighestBalance(e2.getValue());
-                result = (int) (maxBalanceE2 - (int) maxBalanceE1);
+            if (e1bankSum == e2bankSum) {
+                if (getHighestBalance(e1.getValue()) >(getHighestBalance(e2.getValue()))){
+                    return -1;
+                }else if (getHighestBalance(e1.getValue()) <(getHighestBalance(e2.getValue()))){
+                    return 1;
+                }
+            } else if (e2bankSum > e1bankSum) {
+                return 1;
+            } else {
+                return -1;
             }
-            return result;
+            return 0;
         }).forEach(e -> {
-                System.out.println(e.getValue().keySet().iterator().next() + " -> " + e.getValue().values().iterator().next() + "(" +e.getKey() + ")");
+            e.getValue().entrySet().forEach(s -> System.out.printf("%s -> %s (%s)%n", s.getKey(), df.format(s.getValue()), e.getKey()));
+            //System.out.println(e.getValue().entrySet().forEach(System.out::println));
+            //System.out.println(e.getValue().keySet().iterator().next() + " -> " + e.getValue().values().iterator().next() + "(" + e.getKey() + ")");
         });
     }
 
-    public static double getHighestBalance(Map<String,Double> banks){
+    public static double getHighestBalance(Map<String, Double> banks) {
         double maxBalance = Double.MIN_VALUE;
         for (Double value : banks.values()) {
-            if (value > maxBalance){
+            if (value > maxBalance) {
                 maxBalance = value;
             }
         }
