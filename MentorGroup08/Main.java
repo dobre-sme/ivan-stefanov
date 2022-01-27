@@ -33,6 +33,7 @@ public class Main {
             }else {
                 for (int i = 0; i < currentDates.size(); i++) {
                     studentMap.get(username).datesAttended.add(currentDates.get(i));
+
                 }
             }
             input = scanner.nextLine();
@@ -60,7 +61,7 @@ public class Main {
             }
             System.out.println("Dates attended:");
             studentMap.get(e).datesAttended.stream().sorted((e2,e1) -> e2.compareTo(e1)).forEach(ef -> {
-                System.out.printf("-- %s%n", ef);
+                System.out.println("-- " + ef.getDayOfMonth()+"/"+ef.getMonth().getValue()+"/"+ef.getYear());
             });
         });
 
