@@ -1,6 +1,5 @@
 package PawInc;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Center {
@@ -9,7 +8,6 @@ public class Center {
 
     public Center(String name) {
         this.name = name;
-        this.animalList = new ArrayList<>();
     }
 
     public String getName() {

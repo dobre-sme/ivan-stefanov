@@ -4,14 +4,10 @@ public class Animal {
      String name;
      int age;
      boolean cleanStatus = false;
-     String oldCenterName;
+     String adoptionCenterName;
 
-    public String getOldCenterName() {
-        return oldCenterName;
-    }
-
-    public void setOldCenterName(String oldCenterName) {
-        this.oldCenterName = oldCenterName;
+    public String getAdoptionCenterName() {
+        return adoptionCenterName;
     }
 
     public String getName() {
